@@ -1,4 +1,3 @@
-// frontend/src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -17,9 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Add suppressHydrationWarning here to stop extension errors
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      {/* Add it here to stop the ColorZilla extension from throwing errors */}
+      <body className={inter.className} suppressHydrationWarning>
         <Providers>
           <main className="min-h-screen bg-gray-50 text-gray-900">
             {children}
