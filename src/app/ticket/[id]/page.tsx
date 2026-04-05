@@ -107,11 +107,13 @@ export default function TicketDetailsPage() {
             </div>
 
             {/* Add Comment Form */}
-            <form onSubmit={handleCommentSubmit} className="mt-4">
+            <form onSubmit={handleCommentSubmit} className="mt-4 overflow-x-auto">
               <textarea
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Leave a comment..."
+
+                
                 className="w-full rounded-md border border-gray-300 p-3 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 rows={3}
               />
