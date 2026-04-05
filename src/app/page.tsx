@@ -1,13 +1,24 @@
 'use client';
 
+import { useState } from 'react';
 import { useGetTickets } from '@/hooks/useTickets';
 import { formatDistanceToNow } from 'date-fns';
-import { Ticket as TicketIcon, PlusCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Ticket as TicketIcon, PlusCircle, AlertCircle, Loader2, Filter } from 'lucide-react';
 import Link from 'next/link';
 
 export default function TicketDashboard() {
-  // 1. Call our custom hook. Notice how it instantly gives us loading and error states!
   const { data: tickets, isLoading, isError } = useGetTickets();
+
+  // 1. Setup State for our filters
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [priorityFilter, setPriorityFilter] = useState('all');
+
+  // 2. Derive the filtered data dynamically
+  const filteredTickets = tickets?.filter((ticket) => {
+    const matchesStatus = statusFilter === 'all' || ticket.status === statusFilter;
+    const matchesPriority = priorityFilter === 'all' || ticket.priority === priorityFilter;
+    return matchesStatus && matchesPriority;
+  });
 
   if (isLoading) {
     return (
@@ -37,7 +48,6 @@ export default function TicketDashboard() {
           <p className="text-gray-500 mt-1">Manage and track internal support requests.</p>
         </div>
         
-        
         <Link 
           href="/create" 
           className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 transition-colors"
@@ -46,6 +56,36 @@ export default function TicketDashboard() {
           New Ticket
         </Link>
       </header>
+
+      {/* FILTER BAR */}
+      <div className="mb-6 flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+        <div className="flex items-center text-gray-500">
+          <Filter className="mr-2 h-5 w-5" />
+          <span className="text-sm font-medium">Filters:</span>
+        </div>
+        
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="rounded-md border border-gray-300 bg-gray-50 px-3 py-1.5 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        >
+          <option value="all">All Statuses</option>
+          <option value="open">Open</option>
+          <option value="in_progress">In Progress</option>
+          <option value="closed">Closed</option>
+        </select>
+
+        <select
+          value={priorityFilter}
+          onChange={(e) => setPriorityFilter(e.target.value)}
+          className="rounded-md border border-gray-300 bg-gray-50 px-3 py-1.5 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        >
+          <option value="all">All Priorities</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
 
       <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
         <table className="min-w-full divide-y divide-gray-200">
@@ -59,14 +99,15 @@ export default function TicketDashboard() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white">
-            {tickets?.length === 0 ? (
+            {/* 3. Render filteredTickets instead of the raw tickets array */}
+            {filteredTickets?.length === 0 ? (
               <tr>
                 <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
-                  No tickets found. Create one to get started!
+                  No tickets found matching your filters.
                 </td>
               </tr>
             ) : (
-              tickets?.map((ticket) => (
+              filteredTickets?.map((ticket) => (
                 <tr key={ticket.id} className="hover:bg-gray-50 transition-colors">
                   <td className="whitespace-nowrap px-6 py-4">
                     <div className="font-medium text-gray-900">{ticket.title}</div>
@@ -90,11 +131,9 @@ export default function TicketDashboard() {
                     </span>
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                     {/* date-fns makes dates human-readable instantly */}
                     {formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true })}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
-                    {/* We will build this Details page soon */}
                     <Link href={`/ticket/${ticket.id}`} className="text-blue-600 hover:text-blue-900">
                       View Details
                     </Link>
