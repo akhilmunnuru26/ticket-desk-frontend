@@ -86,7 +86,7 @@ export default function TicketDashboard() {
         </div>
       </div>
 
-      <div className="overflow-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+      <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -107,7 +107,7 @@ export default function TicketDashboard() {
                 
                 return (
                   <tr key={ticket.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="whitespace-nowrap px-6 py-4">
+                    <td className="px-6 py-4">
                       <div className="font-medium text-gray-900">{ticket.title}</div>
                       <div className="text-sm text-gray-500 truncate max-w-xs">{ticket.description}</div>
                     </td>
