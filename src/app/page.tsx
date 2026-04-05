@@ -136,7 +136,15 @@ export default function TicketDashboard() {
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                      {ticket.createdAt}
+                      {new Date(ticket.createdAt).toLocaleString('en-IN', {
+                          timeZone: 'Asia/Kolkata',
+                          day: '2-digit',
+                          month: 'short',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          hour12: true
+                        })}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
                       <Link href={`/ticket/${ticket.id}`} className="text-blue-600 hover:text-blue-900">View Details</Link>
