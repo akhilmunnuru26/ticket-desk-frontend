@@ -31,13 +31,7 @@ export default function TicketDashboard() {
   );
 
   
-  const formatTicketDate = (dateString: string) => {
-    if (!dateString) return '';
-    // Ensure the string has a 'Z' so the browser knows it came from a UTC cloud server
-    const utcString = dateString.endsWith('Z') ? dateString : `${dateString}Z`;
-    return formatDistanceToNow(new Date(utcString), { addSuffix: true });
-  };
-
+ 
   // Helper to find a user's name
   const getAssignedUser = (userId: number | null) => {
     if (!userId) return null;
@@ -142,7 +136,7 @@ export default function TicketDashboard() {
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                      {formatTicketDate(ticket.createdAt)}
+                      {ticket.createdAt}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
                       <Link href={`/ticket/${ticket.id}`} className="text-blue-600 hover:text-blue-900">View Details</Link>
