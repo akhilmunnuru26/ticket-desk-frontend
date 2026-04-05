@@ -37,7 +37,7 @@ export default function TicketDashboard() {
           <p className="text-gray-500 mt-1">Manage and track internal support requests.</p>
         </div>
         
-        {/* We will build this Create page next */}
+        
         <Link 
           href="/create" 
           className="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 transition-colors"

@@ -17,7 +17,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* Add it here to stop the ColorZilla extension from throwing errors */}
       <body className={inter.className} suppressHydrationWarning>
         <Providers>
           <main className="min-h-screen bg-gray-50 text-gray-900">
