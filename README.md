@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zeto Ticket Desk - Frontend UI
 
+This is the frontend user interface for the Zeto Ticket Desk application. It is a modern, responsive single-page application built to consume the Zeto Backend API. It leverages React Query for aggressive caching, background fetching, and optimistic UI updates.
+
+## Tech Stack
+
+* **Framework:** Next.js (App Router)
+* **Language:** TypeScript
+* **State Management / Data Fetching:** TanStack React Query & Axios
+* **Styling:** Tailwind CSS
+* **Form Validation:** React Hook Form
+* **Icons:** Lucide React
+
+## Project Structure
+
+```text
+├── src/
+│   ├── app/            # Next.js App Router pages and layouts
+│   ├── hooks/          # Custom React Query hooks for API interaction
+│   ├── lib/            # Axios API client and Provider configurations
+│   ├── types/          # TypeScript interface definitions
+│   └── globals.css     # Tailwind CSS base styles
+├── .env.local.example  # Example environment variables
+└── package.json
+
+```
 ## Getting Started
 
-First, run the development server:
+**Prerequisites**
+Node.js (v18+ recommended)
+
+**Important**: Ensure the Zeto Backend API is running locally on port 5000 before starting the frontend.
+
+## Installation
+
+1. **Clone the repository**:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+https://github.com/akhilmunnuru26/ticket-desk-frontend.git
+cd frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies**:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Environment Variables**:
+Create a .env.local file in the root directory to point to your backend API:
 
-## Learn More
+**NEXT_PUBLIC_API_URL**=http://localhost:5000/api
 
-To learn more about Next.js, take a look at the following resources:
+4. **Start the Development Server**:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5.**View the Application**:
+Open your browser and navigate to http://localhost:3000.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Key Features
 
-## Deploy on Vercel
+**Real-time synchronization**: UI updates instantly upon creating tickets or changing statuses utilizing React Query cache invalidation.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Form Validation**: Strict client-side validation using React Hook Form to prevent bad data submissions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Dynamic Routing**: Seamless navigation between the main dashboard and specific ticket details.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
