@@ -10,7 +10,7 @@ type TicketFormData = {
   title: string;
   description: string;
   priority: 'low' | 'medium' | 'high';
-  assignedToUserId?: string; // Add this for the form
+  assignedToUserId?: string; 
 };
 
 export default function CreateTicketPage() {
@@ -83,10 +83,15 @@ export default function CreateTicketPage() {
               </select>
             </div>
 
-            {/* NEW ASSIGN USER DROPDOWN */}
             <div>
               <label className="block text-sm font-medium text-gray-700">Assign To (Optional)</label>
-              <select {...register('assignedToUserId')} className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none sm:text-sm">
+              
+              <select 
+                {...register('assignedToUserId', {
+                  setValueAs: (value) => (value === "" || value === undefined) ? null : Number(value)
+                })} 
+                className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none sm:text-sm"
+              >
                 <option value="">Unassigned</option>
                 {users?.map(user => (
                   <option key={user.id} value={user.id}>{user.name}</option>
