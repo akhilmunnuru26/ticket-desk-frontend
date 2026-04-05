@@ -30,12 +30,12 @@ export default function TicketDashboard() {
     currentPage * itemsPerPage
   );
 
-  // 3. The Ultimate Timezone Fix!
+  
   const formatTicketDate = (dateString: string) => {
     if (!dateString) return '';
-    // Strip the 'Z' so the browser stops adding 5.5 hours to it!
-    const localString = dateString.endsWith('Z') ? dateString.slice(0, -1) : dateString;
-    return formatDistanceToNow(new Date(localString), { addSuffix: true });
+    // Ensure the string has a 'Z' so the browser knows it came from a UTC cloud server
+    const utcString = dateString.endsWith('Z') ? dateString : `${dateString}Z`;
+    return formatDistanceToNow(new Date(utcString), { addSuffix: true });
   };
 
   // Helper to find a user's name

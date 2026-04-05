@@ -66,3 +66,7 @@ Open your browser and navigate to http://localhost:3000.
 **Form Validation**: Strict client-side validation using React Hook Form to prevent bad data submissions.
 
 **Dynamic Routing**: Seamless navigation between the main dashboard and specific ticket details.
+
+
+
+postgresql://zeto_ticket_db_user:5TyiSRyQGp0DZEsPuIG6XEmUFTjZlPpC@dpg-d78v1qfkijhs738k9u2g-a.oregon-postgres.render.com/zeto_ticket_db?sslmode=require
